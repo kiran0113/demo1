@@ -1,0 +1,97 @@
+name: "Deployment Order Instructions"
+description: "Define the exact deployment sequence for microservices and related components."
+title: "[DeployOrder] - <short summary of change>"
+labels: ["deployment", "release-process"]
+assignees:
+  - your-github-username
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🚀 Microservice Deployment Order Instructions
+        Developers must specify the **exact deployment sequence** for microservices, including database migrations, service dependencies, and post-deployment steps.  
+        Please fill in all sections to ensure consistent and safe deployment.
+
+  # --- DATABASE MIGRATIONS ---
+  - type: textarea
+    id: db_migrations
+    attributes:
+      label: "🗄️ Database Migrations (Run First)"
+      description: "List all database migration files that must be executed before service deployment."
+      placeholder: |
+        Example:
+        - Migration files: `001_init.sql`, `002_add_user_table.sql`
+        - Order of execution: 
+          1. user-db migrations
+          2. payment-db migrations
+    validations:
+      required: false
+
+  # --- CORE SERVICES ---
+  - type: textarea
+    id: core_services
+    attributes:
+      label: "⚙️ Core Services Deployment Order"
+      description: "List microservices and describe why they need to be deployed in a particular sequence."
+      placeholder: |
+        Example:
+        - Service A: Authentication (must go first to issue new tokens)
+        - Service B: UserProfile (depends on Authentication)
+        - Service C: Payments (depends on both A & B)
+    validations:
+      required: false
+
+  # --- GATEWAY/LOAD BALANCER ---
+  - type: textarea
+    id: gateway_updates
+    attributes:
+      label: "🌐 API Gateway / Load Balancer Updates"
+      description: "Detail any route or load balancer changes required post core-service deployment."
+      placeholder: |
+        Example:
+        - Route changes: `/v2/payments` added, `/v1/payments` deprecated
+        - Load balancer: Added new backend pool for PaymentService
+    validations:
+      required: false
+
+  # --- FRONTEND/UI SERVICES ---
+  - type: textarea
+    id: frontend_services
+    attributes:
+      label: "🖥️ Frontend/UI Services (Deploy Last)"
+      description: "Mention UI-related deployments, static assets, and cache management steps."
+      placeholder: |
+        Example:
+        - Static assets deployed to S3: `s3://myapp-ui/`
+        - Cleared CloudFront cache
+        - Version bumped in `index.html`
+    validations:
+      required: false
+
+  # --- CRITICAL NOTES ---
+  - type: textarea
+    id: critical_notes
+    attributes:
+      label: "⚠️ Critical Notes"
+      description: "Document simultaneous deployments, restart sequences, or downtime expectations."
+      placeholder: |
+        Example:
+        - AuthService and TokenService must restart together.
+        - Expected downtime: 3–5 minutes.
+        - Redis flush required before restarting SessionService.
+    validations:
+      required: false
+
+  # --- ADDITIONAL NOTES ---
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "🧠 Additional Notes / Observations"
+      description: "Include any post-deployment verifications or monitoring alerts to watch."
+      placeholder: |
+        Example:
+        - Verify health check `/api/health` for all services post-deploy.
+        - Monitor `kafka-lag` for 10 minutes after deployment.
+    validations:
+      required: false
