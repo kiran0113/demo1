@@ -1,0 +1,86 @@
+name: "External Dependencies"
+description: "Document any new or modified external dependencies such as APIs, services, queues, or authentication."
+title: "[ExternalDep] - <short summary of change>"
+labels: ["external-dependency", "integration"]
+assignees:
+  - your-github-username
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🌐 External Dependencies Change Log
+        Use this template to record changes to external APIs, integrations, or services.  
+        Please provide complete details to ensure smooth environment setup and release tracking.
+
+  - type: textarea
+    id: api_integrations
+    attributes:
+      label: "🔗 API Integrations Modified"
+      description: "List the API services that have been modified or newly added. Include base URLs, endpoints, and a short summary of changes."
+      placeholder: |
+        Example:
+        - Payment Gateway API → Added `/v2/transactions/status`
+        - Notification API → Updated authentication headers
+    validations:
+      required: false
+
+  - type: textarea
+    id: third_party_services
+    attributes:
+      label: "🧩 Third-Party Service Changes"
+      description: "Mention any third-party service configuration changes or version upgrades."
+      placeholder: |
+        Example:
+        - Twilio SDK upgraded from v7.1 to v8.0
+        - Stripe webhook key rotation completed
+    validations:
+      required: false
+
+  - type: textarea
+    id: message_queues
+    attributes:
+      label: "📬 Message Queue Topics"
+      description: "List message queue topics or subscriptions affected by this change."
+      placeholder: |
+        Example:
+        - topic: `order.created` → payload updated with `orderType`
+        - topic: `inventory.updated` → added new consumer
+    validations:
+      required: false
+
+  - type: textarea
+    id: webhook_endpoints
+    attributes:
+      label: "🌍 Webhook Endpoints"
+      description: "List any webhook endpoints added, removed, or updated. Mention the payload structure or authentication details if applicable."
+      placeholder: |
+        Example:
+        - `/api/webhook/payment-status` → new signature validation
+        - `/api/webhook/inventory-sync` → payload updated
+    validations:
+      required: false
+
+  - type: textarea
+    id: auth_changes
+    attributes:
+      label: "🔐 External Authentication Changes"
+      description: "Describe any changes in OAuth configuration, API keys, tokens, or external identity providers."
+      placeholder: |
+        Example:
+        - Added new Google OAuth client for staging
+        - Rotated Azure API keys
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "🧠 Additional Notes"
+      description: "Add any extra context, migration steps, or setup notes for other developers or DevOps."
+      placeholder: |
+        Example:
+        - Requires redeployment of API Gateway
+        - New credentials added to Vault: `secret/api/stripe`
+    validations:
+      required: false
