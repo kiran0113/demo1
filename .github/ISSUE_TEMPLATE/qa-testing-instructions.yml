@@ -1,0 +1,100 @@
+name: "QA Testing Instructions"
+description: "Provide detailed QA testing guidelines, system impacts, and performance verification details."
+title: "[QATest] - <short summary of feature or change>"
+labels: ["qa-testing", "test-plan", "quality-assurance"]
+assignees:
+  - your-github-username
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🧪 QA Testing Instructions
+        Developers must provide **comprehensive testing guidance** for QA engineers to validate functionality, performance, and regression impact.  
+        Fill in all sections below clearly for smooth verification and release confidence.
+
+  # --- SYSTEM IMPACT DOCUMENTATION ---
+  - type: textarea
+    id: system_impact
+    attributes:
+      label: "🧩 Systems Impact Documentation"
+      description: "List all affected systems, features, and related testing scenarios."
+      placeholder: |
+        Example:
+        - **System/Feature:** Payments Service
+          - Verify payment flow using test card 4111 1111 1111 1111
+        - **Database:** Check integrity of `transactions` and `refunds` tables after migration
+        - **API Endpoints:** 
+          - `POST /api/payments/initiate` → Validate success/failure cases
+          - `GET /api/payments/status` → Verify caching and response codes
+    validations:
+      required: false
+
+  # --- REGRESSION TESTING ---
+  - type: textarea
+    id: regression_testing
+    attributes:
+      label: "🔁 Regression Testing Areas"
+      description: "List areas of the application that may be impacted by the changes and should be re-tested."
+      placeholder: |
+        Example:
+        - **Existing Feature:** Login Flow
+          - Ensure login works with old and new authentication methods.
+        - **Existing Feature:** Invoice Generation
+          - Validate PDF generation and email delivery are unaffected.
+    validations:
+      required: false
+
+  # --- PERFORMANCE TESTING ---
+  - type: textarea
+    id: performance_testing
+    attributes:
+      label: "⚙️ Performance Testing"
+      description: "Mention any load, stress, or performance tests required for this update."
+      placeholder: |
+        Example:
+        - Load Testing: Simulate 1000 concurrent payment requests.
+        - Database: Monitor query performance for `SELECT * FROM orders WHERE status='pending'`.
+        - API: Expected response time ≤ 500ms under load.
+    validations:
+      required: false
+
+  # --- DATA VALIDATION ---
+  - type: textarea
+    id: data_validation
+    attributes:
+      label: "🗄️ Data Validation Checks"
+      description: "List data-level validations that QA must perform after deployment."
+      placeholder: |
+        Example:
+        - Verify new `user_role` column populated correctly in `users` table.
+        - Confirm no orphan records after data migration.
+    validations:
+      required: false
+
+  # --- TEST DATA / ENVIRONMENT ---
+  - type: textarea
+    id: test_data
+    attributes:
+      label: "🧰 Test Data / QA Environment Setup"
+      description: "Specify credentials, test data, or environments needed for QA verification."
+      placeholder: |
+        Example:
+        - QA Environment: `https://qa.myapp.com`
+        - Credentials: testuser / Test@123
+        - Test Data: Sample JSON payloads under `/test-data/payment.json`
+    validations:
+      required: false
+
+  # --- NOTES ---
+  - type: textarea
+    id: notes
+    attributes:
+      label: "🧠 Additional Notes"
+      description: "Any extra guidance or special verification instructions."
+      placeholder: |
+        Example:
+        - Run post-deployment validation script: `/scripts/verify_status.sh`
+        - Ensure cache clear before performance testing.
+    validations:
+      required: false
